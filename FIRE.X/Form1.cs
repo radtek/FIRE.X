@@ -25,6 +25,7 @@ namespace FIRE.X
             backgroundWorker1.ProgressChanged += BackgroundWorker1_ProgressChanged;
             backgroundWorker1.RunWorkerCompleted += BackgroundWorker1_RunWorkerCompleted;
             this.cmbImport.SelectedItem = this.cmbImport.Items[0];
+            this.Text = $"{this.Text} - {System.Reflection.Assembly.GetExecutingAssembly().GetName().Version}";
         }
 
         private void BackgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
@@ -50,18 +51,35 @@ namespace FIRE.X
             SetEnabledWhenWorking();
         }
 
+        /// <summary>
+        ///     Disable the UI
+        /// </summary>
         private void SetDisableWhenWorking()
         {
             this.dateTimePicker1.Enabled = false;
             this.dateTimePicker2.Enabled = false;
             this.btnImport.Enabled = false;
+            this.btnExport1.Enabled = false;
+            this.btnExport2.Enabled = false;
         }
 
+        /// <summary>
+        ///     Enable the UI
+        /// </summary>
         private void SetEnabledWhenWorking()
         {
             this.dateTimePicker1.Enabled = true;
             this.dateTimePicker2.Enabled = true;
             this.btnImport.Enabled = true;
+
+            this.btnExport1.Visible = true;
+            this.btnExport2.Visible = true;
+
+            this.btnExport1.Enabled = true;
+            this.btnExport2.Enabled = true;
+
+            this.dateTimePicker1.Visible = true;
+            this.dateTimePicker2.Visible = true;
         }
 
         private void BackgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -144,19 +162,6 @@ namespace FIRE.X
             chart2.Visible = true;
         }
 
-        struct DateAmountSum
-        {
-            public DateTime? Date { get; set; }
-            public decimal Amount { get; set; }
-            public decimal Sum { get; set; }
-        }
-
-        struct PassThrough
-        {
-            public string ImportProvider { get; set; }
-            public Stream File { get; set; }
-        }
-
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
             if(!backgroundWorker1.IsBusy)
@@ -172,8 +177,11 @@ namespace FIRE.X
         private void btnExport1_Click(object sender, EventArgs e)
         {
             var sfd = new SaveFileDialog();
+            sfd.Filter = "PNG image (*.png)|*.png";
+            sfd.DefaultExt = "png";
+            sfd.AddExtension = true;
 
-            if(sfd.ShowDialog() == DialogResult.OK)
+            if (sfd.ShowDialog() == DialogResult.OK)
             {
                 chart1.SaveImage(sfd.FileName, ChartImageFormat.Png);
             }
