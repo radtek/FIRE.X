@@ -28,25 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.btnImport = new System.Windows.Forms.Button();
             this.cmbImport = new System.Windows.Forms.ComboBox();
             this.openFileDialogSelectImport = new System.Windows.Forms.OpenFileDialog();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.btnExport1 = new System.Windows.Forms.Button();
-            this.btnExport2 = new System.Windows.Forms.Button();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.SuspendLayout();
             // 
             // btnImport
@@ -75,39 +68,20 @@
             // 
             // chart1
             // 
-            chartArea9.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea9);
-            legend9.Name = "Legend1";
-            this.chart1.Legends.Add(legend9);
+            this.chart1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(12, 112);
             this.chart1.Name = "chart1";
-            series9.ChartArea = "ChartArea1";
-            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series9.Legend = "Legend1";
-            series9.Name = "Series1";
-            this.chart1.Series.Add(series9);
-            this.chart1.Size = new System.Drawing.Size(1217, 204);
+            this.chart1.Size = new System.Drawing.Size(1227, 437);
             this.chart1.TabIndex = 2;
             this.chart1.Text = "chart1";
+            this.chart1.TextAntiAliasingQuality = System.Windows.Forms.DataVisualization.Charting.TextAntiAliasingQuality.SystemDefault;
             this.chart1.Visible = false;
-            // 
-            // chart2
-            // 
-            chartArea10.Name = "ChartArea1";
-            this.chart2.ChartAreas.Add(chartArea10);
-            legend10.Name = "Legend1";
-            this.chart2.Legends.Add(legend10);
-            this.chart2.Location = new System.Drawing.Point(12, 351);
-            this.chart2.Name = "chart2";
-            series10.ChartArea = "ChartArea1";
-            series10.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series10.Legend = "Legend1";
-            series10.Name = "Series1";
-            this.chart2.Series.Add(series10);
-            this.chart2.Size = new System.Drawing.Size(1217, 204);
-            this.chart2.TabIndex = 3;
-            this.chart2.Text = "chart2";
-            this.chart2.Visible = false;
             // 
             // dateTimePicker1
             // 
@@ -136,7 +110,8 @@
             // 
             // btnExport1
             // 
-            this.btnExport1.Location = new System.Drawing.Point(1154, 322);
+            this.btnExport1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExport1.Location = new System.Drawing.Point(1154, 555);
             this.btnExport1.Name = "btnExport1";
             this.btnExport1.Size = new System.Drawing.Size(75, 23);
             this.btnExport1.TabIndex = 7;
@@ -145,34 +120,32 @@
             this.btnExport1.Visible = false;
             this.btnExport1.Click += new System.EventHandler(this.btnExport1_Click);
             // 
-            // btnExport2
+            // checkedListBox1
             // 
-            this.btnExport2.Location = new System.Drawing.Point(1154, 561);
-            this.btnExport2.Name = "btnExport2";
-            this.btnExport2.Size = new System.Drawing.Size(75, 23);
-            this.btnExport2.TabIndex = 8;
-            this.btnExport2.Text = "Export";
-            this.btnExport2.UseVisualStyleBackColor = true;
-            this.btnExport2.Visible = false;
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Location = new System.Drawing.Point(424, 12);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(181, 94);
+            this.checkedListBox1.TabIndex = 8;
+            this.checkedListBox1.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBox1_ItemCheck);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1241, 590);
-            this.Controls.Add(this.btnExport2);
+            this.Controls.Add(this.chart1);
+            this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.btnExport1);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.dateTimePicker2);
             this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.chart2);
-            this.Controls.Add(this.chart1);
             this.Controls.Add(this.cmbImport);
             this.Controls.Add(this.btnImport);
             this.Name = "Form1";
             this.Text = "FIRE.X";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -183,13 +156,11 @@
         private System.Windows.Forms.ComboBox cmbImport;
         private System.Windows.Forms.OpenFileDialog openFileDialogSelectImport;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Button btnExport1;
-        private System.Windows.Forms.Button btnExport2;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
     }
 }
 

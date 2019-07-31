@@ -78,6 +78,7 @@
     <Compile Include="IImportProvider.cs" />
     <Compile Include="ImportModel.cs" />
     <Compile Include="ImportProviders.cs" />
+    <Compile Include="ImportResult.cs" />
     <Compile Include="Mintos\Import\MintosImport.cs" />
     <Compile Include="Mintos\Import\MintosImportProvider.cs" />
     <Compile Include="PassTrough.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
