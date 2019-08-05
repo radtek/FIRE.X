@@ -1,4 +1,5 @@
 ﻿using CsvHelper;
+using FIRE.X.DL;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,6 +11,8 @@ namespace FIRE.X.Mintos.Import
     public class MintosImportProvider : IImportProvider
     {
         public string GetName() => "Mintos";
+
+        public TransactionSource GetTransactionSource() => TransactionSource.Mintos;
 
         private IProgress<int> Progress;
 
@@ -48,7 +51,7 @@ namespace FIRE.X.Mintos.Import
                               .Select(offset => start.AddDays(offset))
                               .ToArray();
 
-            List<DateAmountSum> obj = new List<DateAmountSum>();
+           List<DateAmountSum> obj = new List<DateAmountSum>();
 
             for (int i = 0; i < dates.Count(); i++)
             {
@@ -78,8 +81,7 @@ namespace FIRE.X.Mintos.Import
 
                 obj.Add(ob);
 
-                var percentage = ((decimal)i / dates.Count()) * 100.0m;
-                Progress.Report((int)Math.Round(percentage));
+                Progress.Report((int)((decimal)i / dates.Count() * 100.0m));
             }
 
             return new ImportResult<IImportModel>()

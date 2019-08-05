@@ -18,7 +18,7 @@ namespace FIRE.X
             ImportProviders.RegisterImportProviders();
 
             // Run the application
-            Application.Run(new Form1());
+            Application.Run(new frmMain());
         }
     }
 }
