@@ -9,12 +9,11 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 using System.Windows.Forms.DataVisualization.Charting;
 
-namespace FIRE.X.Mintos.Charts
+namespace FIRE.X.Charts
 {
-    public class MintosCharts : IChart
+    public class Charts : IChart
     {
-        public Expression<Func<Transaction, bool>> GetTransactionSource() => (t) => t.Source == TransactionSource.Mintos;
-
+        public Expression<Func<Transaction, bool>> GetTransactionSource() => (t) => t.Source == TransactionSource.Grupeer || t.Source == TransactionSource.Mintos;
 
         private double? IRR(IEnumerable<decimal> values, IEnumerable<DateTime> dates)
         {
@@ -39,39 +38,39 @@ namespace FIRE.X.Mintos.Charts
 
                 var rentPerDay = new LineSeries()
                 {
-                    Title = Resources.RENT_DAY + " mintos",
+                    Title = Resources.RENT_DAY + " all",
                     Smooth = true
                 };
 
                 var serieInterestTotal = new LineSeries()
                 {
-                    Title = Resources.RENT_TOTAL + " mintos"
+                    Title = Resources.RENT_TOTAL + " all"
                 };
 
                 var serieBalance = new LineSeries()
                 {
-                    Title = Resources.BALANCE + " mintos"
+                    Title = Resources.BALANCE + " all"
                 };
 
                 var serieInvestment = new LineSeries()
                 {
-                    Title = Resources.INVESTMENTS + " mintos"
+                    Title = Resources.INVESTMENTS + " all"
                 };
 
                 var serieDeposits = new LineSeries()
                 {
-                    Title = "Deposits" + " mintos"
+                    Title = Resources.INVESTMENTS + " all"
                 };
 
                 var serieYield = new LineSeries()
                 {
-                    Title = "Yield" + " mintos",
+                    Title = "Yield all",
                     Smooth = true
                 };
 
                 var serieXirr = new LineSeries()
                 {
-                    Title = "Xirr" + " mintos"
+                    Title = "Xirr all"
                 };
 
                 var dataForIRR =
@@ -136,7 +135,21 @@ namespace FIRE.X.Mintos.Charts
 
         public DateTime?[] MaxRange()
         {
-            return ContextHelpers.GetRange()[TransactionSource.Mintos];
+            DateTime? lowest = DateTime.Now;
+            DateTime? highest = DateTime.Now;
+
+            foreach(var dt in ContextHelpers.GetRange())
+            {
+                var low = dt.Value[0].Value;
+                if (low < lowest)
+                    lowest = low;
+
+                var high = dt.Value[1].Value;
+                if (high > highest)
+                    highest = high;
+            }
+
+            return new DateTime?[2] { lowest, highest };
         }
     }
 }

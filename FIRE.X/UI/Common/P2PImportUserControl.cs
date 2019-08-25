@@ -35,10 +35,10 @@ namespace FIRE.X.UI.Common
                 this.lblPercentage.Visible = true;
                 var pt = new PassThrough() { File = openFileDialogSelectImport.OpenFile(), ImportProvider = cmbImport.SelectedItem as string };
                 var importProvider = ImportProviders.GetImportProvider(pt.ImportProvider);
-                importProvider.GetRecords<Mintos.Import.MintosImport>(pt.File, (data) =>
+                importProvider.GetRecords(pt.File, (data) =>
                 {
                     // set the import result
-                    Data = data.ImportRules.Cast<IImportModel>().ToList();
+                    Data = data.ImportRules.ToList();
 
                     var ds = new BindingSource();
                     ds.DataSource = data.ImportRulesAsDataTable();

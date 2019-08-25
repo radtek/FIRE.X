@@ -28,91 +28,77 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.dateTimePickerFrom = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePickerTo = new System.Windows.Forms.DateTimePicker();
-            this.cmbSelectSource = new System.Windows.Forms.ComboBox();
             this.btnSaveAsImage = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
+            this.plotView1 = new OxyPlot.WindowsForms.PlotView();
+            this.btnReset = new System.Windows.Forms.Button();
+            this.ucSeries = new FIRE.X.UI.UserControls.UCSeries();
             this.SuspendLayout();
-            // 
-            // chart
-            // 
-            this.chart.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea1.AxisX.LabelStyle.Format = "yyyy-MM-dd";
-            chartArea1.AxisX.LabelStyle.Interval = 1D;
-            chartArea1.AxisX.LabelStyle.IntervalOffset = 1D;
-            chartArea1.AxisX.LabelStyle.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Months;
-            chartArea1.Name = "ChartArea1";
-            this.chart.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart.Legends.Add(legend1);
-            this.chart.Location = new System.Drawing.Point(0, 29);
-            this.chart.Name = "chart";
-            this.chart.Size = new System.Drawing.Size(842, 356);
-            this.chart.TabIndex = 0;
-            this.chart.Text = "chart1";
-            // 
-            // dateTimePickerFrom
-            // 
-            this.dateTimePickerFrom.Location = new System.Drawing.Point(3, 3);
-            this.dateTimePickerFrom.Name = "dateTimePickerFrom";
-            this.dateTimePickerFrom.Size = new System.Drawing.Size(197, 20);
-            this.dateTimePickerFrom.TabIndex = 1;
-            // 
-            // dateTimePickerTo
-            // 
-            this.dateTimePickerTo.Location = new System.Drawing.Point(206, 3);
-            this.dateTimePickerTo.Name = "dateTimePickerTo";
-            this.dateTimePickerTo.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePickerTo.TabIndex = 2;
-            // 
-            // cmbSelectSource
-            // 
-            this.cmbSelectSource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cmbSelectSource.FormattingEnabled = true;
-            this.cmbSelectSource.Location = new System.Drawing.Point(718, 3);
-            this.cmbSelectSource.Name = "cmbSelectSource";
-            this.cmbSelectSource.Size = new System.Drawing.Size(121, 21);
-            this.cmbSelectSource.TabIndex = 3;
             // 
             // btnSaveAsImage
             // 
             this.btnSaveAsImage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSaveAsImage.Location = new System.Drawing.Point(637, 3);
+            this.btnSaveAsImage.Location = new System.Drawing.Point(764, 3);
             this.btnSaveAsImage.Name = "btnSaveAsImage";
-            this.btnSaveAsImage.Size = new System.Drawing.Size(75, 21);
+            this.btnSaveAsImage.Size = new System.Drawing.Size(75, 23);
             this.btnSaveAsImage.TabIndex = 4;
             this.btnSaveAsImage.Text = "Export";
             this.btnSaveAsImage.UseVisualStyleBackColor = true;
             this.btnSaveAsImage.Click += new System.EventHandler(this.btnSaveAsImage_Click);
             // 
+            // plotView1
+            // 
+            this.plotView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.plotView1.BackColor = System.Drawing.Color.White;
+            this.plotView1.Location = new System.Drawing.Point(3, 29);
+            this.plotView1.Name = "plotView1";
+            this.plotView1.PanCursor = System.Windows.Forms.Cursors.Hand;
+            this.plotView1.Size = new System.Drawing.Size(610, 353);
+            this.plotView1.TabIndex = 5;
+            this.plotView1.Text = "plotView1";
+            this.plotView1.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
+            this.plotView1.ZoomRectangleCursor = System.Windows.Forms.Cursors.SizeNWSE;
+            this.plotView1.ZoomVerticalCursor = System.Windows.Forms.Cursors.SizeNS;
+            // 
+            // btnReset
+            // 
+            this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnReset.Location = new System.Drawing.Point(683, 3);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(75, 23);
+            this.btnReset.TabIndex = 8;
+            this.btnReset.Text = "Reset";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.BtnReset_Click);
+            // 
+            // ucSeries
+            // 
+            this.ucSeries.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ucSeries.Location = new System.Drawing.Point(619, 29);
+            this.ucSeries.Name = "ucSeries";
+            this.ucSeries.Size = new System.Drawing.Size(223, 353);
+            this.ucSeries.TabIndex = 7;
+            // 
             // ChartUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnReset);
+            this.Controls.Add(this.ucSeries);
             this.Controls.Add(this.btnSaveAsImage);
-            this.Controls.Add(this.cmbSelectSource);
-            this.Controls.Add(this.dateTimePickerTo);
-            this.Controls.Add(this.dateTimePickerFrom);
-            this.Controls.Add(this.chart);
+            this.Controls.Add(this.plotView1);
             this.Name = "ChartUserControl";
             this.Size = new System.Drawing.Size(842, 385);
-            ((System.ComponentModel.ISupportInitialize)(this.chart)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        public System.Windows.Forms.DataVisualization.Charting.Chart chart;
-        private System.Windows.Forms.DateTimePicker dateTimePickerFrom;
-        private System.Windows.Forms.DateTimePicker dateTimePickerTo;
-        private System.Windows.Forms.ComboBox cmbSelectSource;
         private System.Windows.Forms.Button btnSaveAsImage;
+        private OxyPlot.WindowsForms.PlotView plotView1;
+        private UserControls.UCSeries ucSeries;
+        private System.Windows.Forms.Button btnReset;
     }
 }

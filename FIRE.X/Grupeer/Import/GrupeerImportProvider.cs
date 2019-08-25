@@ -4,17 +4,18 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace FIRE.X.Mintos.Import
+namespace FIRE.X.Grupeer.Import
 {
-    public class MintosImportProvider<T> : ImportProvider where T : MintosImport
+    public class GrupeerImportProvider<T> : ImportProvider where T : GrupeerImport
     {
-        public override string GetName() => "Mintos";
+        public override string GetName() => "Grupeer";
 
         public override TransactionSource GetTransactionSource() => TransactionSource.Mintos;
 
-        private ImportResult<IImportModel> Collector(Task<List<MintosImport>> task)
+        private ImportResult<IImportModel> Collector(Task<List<GrupeerImport>> task)
         {
             return new ImportResult<IImportModel>()
             {
@@ -32,10 +33,10 @@ namespace FIRE.X.Mintos.Import
             // start the task
             return await Task.Run(() =>
             {
-                using (var reader = new StreamReader(file))
+                using (var reader = new StreamReader(file, Encoding.Default))
                 using (var csvReader = new CsvReader(reader))
                 {
-                    return csvReader.GetRecords<MintosImport>().ToList();
+                    return csvReader.GetRecords<GrupeerImport>().ToList();
                 }
             }).ContinueWith(Collector).ContinueWith((t) =>
             {

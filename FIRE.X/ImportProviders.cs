@@ -1,18 +1,18 @@
-﻿using FIRE.X.Mintos.Import;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace FIRE.X
 {
     public static class ImportProviders
     {
-        private static System.Collections.Generic.List<IImportProvider> CreatedImportProviders = new List<IImportProvider>();
+        private static List<ImportProvider> CreatedImportProviders = new List<ImportProvider>();
         public static void RegisterImportProviders()
         {
-            CreatedImportProviders.Add(new MintosImportProvider());
+            CreatedImportProviders.Add(new Mintos.Import.MintosImportProvider<Mintos.Import.MintosImport>());
+            CreatedImportProviders.Add(new Grupeer.Import.GrupeerImportProvider<Grupeer.Import.GrupeerImport>());
         }
 
-        public static IImportProvider GetImportProvider(string name)
+        public static ImportProvider GetImportProvider(string name)
         {
             return CreatedImportProviders.FirstOrDefault(p => p.GetName() == name);
         }

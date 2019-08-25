@@ -8,8 +8,9 @@ namespace FIRE.X
 {
     public class ImportResult<T>
     {
+        public Type RealType { get; set; }
+
         public List<T> ImportRules { get; set; }
-        public List<DateAmountSum> ChartData { get; set; }
 
         public DataTable ImportRulesAsDataTable()
         {
@@ -17,15 +18,15 @@ namespace FIRE.X
             dt.Locale = CultureInfo.InvariantCulture;
 
             // add the columns
-            foreach(var property in typeof(T).GetProperties())
+            foreach(var property in RealType.GetProperties())
             {
-                dt.Columns.Add(property.Name);
+                dt.Columns.Add(property.Name, Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType);
             }
 
             // add the rows
             foreach(var row in ImportRules)
             {
-                object[] values = typeof(T).GetProperties().Select(f => f.GetValue(row)).ToArray();
+                object[] values = RealType.GetProperties().Select(f => f.GetValue(row)).ToArray();
                 dt.Rows.Add(values);
             }
 

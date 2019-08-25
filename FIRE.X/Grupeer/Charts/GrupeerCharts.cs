@@ -6,15 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms.DataVisualization.Charting;
 
-namespace FIRE.X.Mintos.Charts
+namespace FIRE.X.Grupeer.Charts
 {
-    public class MintosCharts : IChart
+    public class GrupeerCharts : IChart
     {
-        public Expression<Func<Transaction, bool>> GetTransactionSource() => (t) => t.Source == TransactionSource.Mintos;
-
+        public Expression<Func<Transaction, bool>> GetTransactionSource() => (t) => t.Source == TransactionSource.Grupeer;
 
         private double? IRR(IEnumerable<decimal> values, IEnumerable<DateTime> dates)
         {
@@ -39,39 +38,39 @@ namespace FIRE.X.Mintos.Charts
 
                 var rentPerDay = new LineSeries()
                 {
-                    Title = Resources.RENT_DAY + " mintos",
+                    Title = Resources.RENT_DAY + " grupeer",
                     Smooth = true
                 };
 
                 var serieInterestTotal = new LineSeries()
                 {
-                    Title = Resources.RENT_TOTAL + " mintos"
+                    Title = Resources.RENT_TOTAL + " grupeer"
                 };
 
                 var serieBalance = new LineSeries()
                 {
-                    Title = Resources.BALANCE + " mintos"
+                    Title = Resources.BALANCE + " grupeer"
                 };
 
                 var serieInvestment = new LineSeries()
                 {
-                    Title = Resources.INVESTMENTS + " mintos"
+                    Title = Resources.INVESTMENTS + " grupeer"
                 };
 
                 var serieDeposits = new LineSeries()
                 {
-                    Title = "Deposits" + " mintos"
+                    Title = "Deposists" + " grupeer"
                 };
 
                 var serieYield = new LineSeries()
                 {
-                    Title = "Yield" + " mintos",
+                    Title = "Yield" + " grupeer",
                     Smooth = true
                 };
 
                 var serieXirr = new LineSeries()
                 {
-                    Title = "Xirr" + " mintos"
+                    Title = "Xirr" + " grupeer"
                 };
 
                 var dataForIRR =
@@ -88,7 +87,7 @@ namespace FIRE.X.Mintos.Charts
                     var sumInterest = data.Where(tr => tr.Date.Value.Date <= date.Date && tr.TransactionType == TransactionType.Interest).Sum(tr => tr.Amount);
                     serieInterestTotal.Points.Add(new OxyPlot.DataPoint(timestamp, Convert.ToDouble(sumInterest)));
 
-                    var transactionBalance = transToday.Any() ? transToday.Last().Balance.Value : data.Where(f => f.Balance.HasValue && f.Date.Value <= date.Date).Last().Balance;
+                    var transactionBalance = transToday.Any() ? transToday.Last().Balance.Value : data.Where(f => f.Balance.HasValue && f.Date.Value <= date.Date).Any() ? data.Where(f => f.Balance.HasValue && f.Date.Value <= date.Date).Last().Balance : 0;
                     if (transactionBalance.HasValue)
                         serieBalance.Points.Add(new OxyPlot.DataPoint(timestamp, Convert.ToDouble(transactionBalance)));
 
@@ -104,7 +103,8 @@ namespace FIRE.X.Mintos.Charts
                     var rent = data.Where(f => f.Date.Value.Date <= date.Date && f.TransactionType == TransactionType.Interest).Sum(f => f.Amount);
                     var totalAsset = deposits - withdraws;
 
-                    serieYield.Points.Add(new OxyPlot.DataPoint(timestamp, Convert.ToDouble(rent / totalAsset) * 100));
+                    if(totalAsset != 0)
+                        serieYield.Points.Add(new OxyPlot.DataPoint(timestamp, Convert.ToDouble(rent / totalAsset) * 100));
 
                     // xirr
                     var gr = dataForIRR.Where(f => f.Date.Value <= date.Date)
@@ -122,12 +122,12 @@ namespace FIRE.X.Mintos.Charts
                         serieXirr.Points.Add(new OxyPlot.DataPoint(timestamp, gr.Average(v => v.xiir.Value)));
                 }
 
-                return new object[7] {
+                return new object[5] {
                 rentPerDay,
                 serieInterestTotal,
                 serieBalance,
-                serieInvestment,
-                serieDeposits,
+                //serieInvestment,
+                //serieDeposits,
                 serieYield,
                 serieXirr
                 };
@@ -136,7 +136,7 @@ namespace FIRE.X.Mintos.Charts
 
         public DateTime?[] MaxRange()
         {
-            return ContextHelpers.GetRange()[TransactionSource.Mintos];
+            return ContextHelpers.GetRange()[TransactionSource.Grupeer];
         }
     }
 }

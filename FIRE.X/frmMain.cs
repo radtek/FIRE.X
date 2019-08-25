@@ -49,8 +49,7 @@ namespace FIRE.X
                     Text = "Import"
                 },  new MenuItemUserControl(new EventHandler((o, a) =>
                     {
-                        var chart = new Mintos.Charts.MintosCharts();
-                        this.SetContent(new ChartUserControl(new ChartUserControlView(chart)));
+                        this.SetContent(new ChartUserControl(new ChartUserControlView()));
                     })) {
                     Text = "Charts"
                 }}

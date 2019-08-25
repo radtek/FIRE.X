@@ -9,61 +9,109 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FIRE.X.DL;
 using System.Windows.Forms.DataVisualization.Charting;
+using OxyPlot;
+using OxyPlot.Axes;
+using OxyPlot.Series;
 
 namespace FIRE.X.UI.Common
 {
     public partial class ChartUserControl : UserControl
     {
-        private ChartUserControlView ChartUserControlView {get;set;}
+        private ChartUserControlView ChartUserControlView { get; set; }
+
+        private PlotModel Chart { get; set; }
 
         public ChartUserControl(ChartUserControlView chartUserControlView)
         {
             InitializeComponent();
 
-            var dateRange = chartUserControlView.Chart.MaxRange();
+            Chart = new PlotModel();
+            Chart.LegendOrientation = LegendOrientation.Horizontal;
+            Chart.LegendPlacement = LegendPlacement.Outside;
+            Chart.LegendPosition = LegendPosition.BottomLeft;
+            Chart.IsLegendVisible = true;
+            Chart.Series.CollectionChanged += Series_CollectionChanged;
 
-            this.dateTimePickerFrom.Value = dateRange[0].Value;
-            this.dateTimePickerTo.Value = dateRange[1].Value;
+            var xAxis = new DateTimeAxis();
+            xAxis.StringFormat = "yyyy-MM-dd";
+            xAxis.Position = AxisPosition.Bottom;
+            xAxis.IntervalLength = 1;
+            xAxis.IntervalType = OxyPlot.Axes.DateTimeIntervalType.Months;
+            xAxis.MinorIntervalType = OxyPlot.Axes.DateTimeIntervalType.Days;
 
-            this.dateTimePickerTo.ValueChanged += (obj, arg) => UpdateSeries(dateTimePickerFrom.Value, dateTimePickerTo.Value);
-            this.dateTimePickerFrom.ValueChanged += (obj, arg) => UpdateSeries(dateTimePickerFrom.Value, dateTimePickerTo.Value);
+            Chart.Axes.Add(xAxis);
 
-            ChartUserControlView = chartUserControlView;
+            // set the viewmodel
+            this.ChartUserControlView = chartUserControlView;
 
-            // update the series
-            UpdateSeries(dateRange[0].Value, dateRange[1].Value);
+            this.plotView1.Model = Chart;
 
-            // add the import providers
-            foreach (var importProvider in ImportProviders.ImportProviderNames)
-            {
-                this.cmbSelectSource.Items.Add(importProvider);
-            }
+            this.ucSeries.checkedListBox1.ItemCheck += CheckedListBox1_ItemCheck;
 
-            // format the dropdown of importproviders
-            this.cmbSelectSource.DropDownStyle = ComboBoxStyle.DropDownList;
-            if (cmbSelectSource.Items.Count > 0)
-                this.cmbSelectSource.SelectedItem = this.cmbSelectSource.Items[0];
-
-            // some formatting
-            chart.ChartAreas[0].AxisX.LabelStyle.Format = "yyyy-MM-dd";
-            chart.ChartAreas[0].AxisX.Interval = 1;
-            chart.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Months;
-            chart.ChartAreas[0].AxisX.IntervalOffset = 1;
-            chart.ChartAreas[0].AxisX.MajorGrid.Enabled = false;
+            LoadAll();
         }
 
-        private void UpdateSeries(DateTime from, DateTime to)
+        private void CheckedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            this.chart.Series.Clear();
+            List<string> checkedItems = new List<string>();
+            foreach (var item in this.ucSeries.checkedListBox1.CheckedItems)
+                checkedItems.Add(item.ToString());
 
-            // add the charts
-            foreach (var range in ChartUserControlView.Chart.GetSeries(from, to))
+            if (e.NewValue == CheckState.Checked)
+                checkedItems.Add(this.ucSeries.checkedListBox1.Items[e.Index].ToString());
+            else
+                checkedItems.Remove(this.ucSeries.checkedListBox1.Items[e.Index].ToString());
+
+            foreach (var serie in this.Chart.Series)
             {
-                this.chart.Series.Add(range);
+                if (!checkedItems.Contains(serie.Title))
+                    serie.IsVisible = false;
+                else
+                    serie.IsVisible = true;
             }
 
-            // format the graph based on the given range
-            chart.ChartAreas[0].AxisX.IntervalType = to.Subtract(from).TotalDays > 60 ? DateTimeIntervalType.Months : DateTimeIntervalType.Days;
+            this.Chart.InvalidatePlot(true);
+        }
+
+        private void Series_CollectionChanged(object sender, ElementCollectionChangedEventArgs<OxyPlot.Series.Series> e)
+        {
+            ucSeries.AddSeries(e.AddedItems.ToArray());
+        }
+
+        private void Clear()
+        {
+            this.Chart.Series.Clear();
+            this.ucSeries.Clear();
+        }
+
+        private async void UpdateSeries(DateTime from, DateTime to)
+        {
+            // we still need the min and max information
+            var minMax = ChartUserControlView.Chart.MaxRange();
+
+            // add the charts
+            await ChartUserControlView.Chart.GetSeries(from, to).ContinueWith(r =>
+            {
+                foreach (var range in r.Result)
+                {
+                    this.Chart.Series.Add((LineSeries)range);
+                }
+                this.Chart.InvalidatePlot(true);
+            }, TaskScheduler.FromCurrentSynchronizationContext());
+        }
+
+        private async void UpdateSeries(IChart chart)
+        {
+            var charts = chart;
+
+            var range = charts.MaxRange();
+            var results = await charts.GetSeries(range[0].Value, range[1].Value);
+
+            foreach (var lineSerie in results.Cast<LineSeries>())
+            {
+                this.Chart.Series.Add(lineSerie);
+            }
+            this.Chart.InvalidatePlot(true);
         }
 
         private void btnSaveAsImage_Click(object sender, EventArgs e)
@@ -71,10 +119,24 @@ namespace FIRE.X.UI.Common
             var sfd = new SaveFileDialog();
             sfd.AddExtension = true;
             sfd.DefaultExt = "jpg";
-            if(sfd.ShowDialog() == DialogResult.OK)
+            if (sfd.ShowDialog() == DialogResult.OK)
             {
-                this.chart.SaveImage(sfd.OpenFile(), System.Windows.Forms.DataVisualization.Charting.ChartImageFormat.Png); ;
+                new SvgExporter().Export(this.Chart, sfd.OpenFile());
             }
+        }
+
+        private void LoadAll()
+        {
+            this.Clear();
+            UpdateSeries(new FIRE.X.Charts.Charts());
+            UpdateSeries(new Mintos.Charts.MintosCharts());
+            UpdateSeries(new Grupeer.Charts.GrupeerCharts());
+        }
+
+        private void BtnReset_Click(object sender, EventArgs e)
+        {
+            Chart.ResetAllAxes();
+            Chart.InvalidatePlot(true);
         }
     }
 }

@@ -60,6 +60,18 @@
     <Reference Include="EntityFramework.SqlServerCompact, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.SqlServerCompact.6.2.0\lib\net45\EntityFramework.SqlServerCompact.dll</HintPath>
     </Reference>
+    <Reference Include="ExcelFinancialFunctions, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelFinancialFunctions.2.4\lib\portable-net45+netcore45+wpa81+wp8\ExcelFinancialFunctions.dll</HintPath>
+    </Reference>
+    <Reference Include="FSharp.Core, Version=4.4.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\FSharp.Core.4.0.0.1\lib\net40\FSharp.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot, Version=1.0.0.0, Culture=neutral, PublicKeyToken=638079a8f0bd61e9, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.Core.1.0.0\lib\net45\OxyPlot.dll</HintPath>
+    </Reference>
+    <Reference Include="OxyPlot.WindowsForms, Version=1.0.0.0, Culture=neutral, PublicKeyToken=245eacd6b5d2d338, processorArchitecture=MSIL">
+      <HintPath>..\packages\OxyPlot.WindowsForms.1.0.0\lib\net45\OxyPlot.WindowsForms.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -88,17 +100,33 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Grupeer\Charts\GrupeerCharts.cs" />
+    <Compile Include="Grupeer\Import\GrupeerImportProvider.cs" />
+    <Compile Include="Grupeer\Import\GrupeerImport.cs" />
     <Compile Include="IChart.cs" />
     <Compile Include="IImportProvider.cs" />
     <Compile Include="ImportModel.cs" />
     <Compile Include="ImportProviders.cs" />
     <Compile Include="ImportResult.cs" />
+    <Compile Include="Charts.cs" />
     <Compile Include="Mintos\Charts\MintosCharts.cs" />
     <Compile Include="Mintos\Import\MintosImport.cs" />
     <Compile Include="Mintos\Import\MintosImportProvider.cs" />
     <Compile Include="PassTrough.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\Charts\UCInvestmentsInterestIncomePerMonth.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Charts\UCInvestmentsInterestIncomePerMonth.Designer.cs">
+      <DependentUpon>UCInvestmentsInterestIncomePerMonth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Charts\UCInvestmentPerSource.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Charts\UCInvestmentPerSource.Designer.cs">
+      <DependentUpon>UCInvestmentPerSource.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Common\ChartUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -125,6 +153,12 @@
     <Compile Include="UI\Common\P2PImportUserControl.Designer.cs">
       <DependentUpon>P2PImportUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\UserControls\UCSeries.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UserControls\UCSeries.Designer.cs">
+      <DependentUpon>UCSeries.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -138,6 +172,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\Charts\UCInvestmentsInterestIncomePerMonth.resx">
+      <DependentUpon>UCInvestmentsInterestIncomePerMonth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Charts\UCInvestmentPerSource.resx">
+      <DependentUpon>UCInvestmentPerSource.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Common\ChartUserControl.resx">
       <DependentUpon>ChartUserControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -149,6 +189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Common\P2PImportUserControl.resx">
       <DependentUpon>P2PImportUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UserControls\UCSeries.resx">
+      <DependentUpon>UCSeries.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

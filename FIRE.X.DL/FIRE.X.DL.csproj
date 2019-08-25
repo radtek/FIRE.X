@@ -75,10 +75,23 @@
     <Compile Include="Migrations\201908050901282_add_balance_to_transactions.Designer.cs">
       <DependentUpon>201908050901282_add_balance_to_transactions.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908061223393_add_transaction_type.cs" />
+    <Compile Include="Migrations\201908061223393_add_transaction_type.Designer.cs">
+      <DependentUpon>201908061223393_add_transaction_type.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908211404122_Precision.cs" />
+    <Compile Include="Migrations\201908211404122_Precision.Designer.cs">
+      <DependentUpon>201908211404122_Precision.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908211411144_More_Precision.cs" />
+    <Compile Include="Migrations\201908211411144_More_Precision.Designer.cs">
+      <DependentUpon>201908211411144_More_Precision.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transaction.cs" />
     <Compile Include="TransactionSource.cs" />
+    <Compile Include="TransactionType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -98,6 +111,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908050901282_add_balance_to_transactions.resx">
       <DependentUpon>201908050901282_add_balance_to_transactions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908061223393_add_transaction_type.resx">
+      <DependentUpon>201908061223393_add_transaction_type.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908211404122_Precision.resx">
+      <DependentUpon>201908211404122_Precision.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908211411144_More_Precision.resx">
+      <DependentUpon>201908211411144_More_Precision.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

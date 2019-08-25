@@ -35,14 +35,36 @@ namespace FIRE.X.Mintos.Import
                 Source = TransactionSource.Mintos,
                 TransactionId = TransactionID,
                 LoanId = GetLoanIdFromDetails(),
-                Balance = Balance
+                Balance = Balance,
+                TransactionType = GetTransactionType(this.Details)
             };
         }
 
         private string GetLoanIdFromDetails()
         {
             string search = "Loan ID: ";
-            return Details.Substring(Details.IndexOf(search) + search.Length);
+            int idx = Details.IndexOf(search);
+            if (idx == -1)
+                return String.Empty;
+            else
+                return Details.Substring(Details.IndexOf(search) + search.Length);
+        }
+
+        private TransactionType GetTransactionType(string details)
+        {
+            if (details.StartsWith("Incoming client payment"))
+                return TransactionType.Deposit;
+            else if (details.StartsWith("Investment principal increase Loan ID:"))
+                return TransactionType.Investment;
+            else if (
+                details.ToLower().Contains("interest"))
+                return TransactionType.Interest;
+            else if (details.StartsWith("Investment principal rebuy Rebuy purpose:") || details.StartsWith("Investment principal repayment Loan ID:"))
+                return TransactionType.Principal;
+            else if (details.StartsWith("Withdraw"))
+                return TransactionType.Withdraw;
+            else
+                return TransactionType.Other;
         }
     }
 }

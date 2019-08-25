@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace FIRE.X
 {
-    public interface IImportProvider
+    public abstract class ImportProvider
     {
-        string GetName();
-        TransactionSource GetTransactionSource();
-        Task<ImportResult<T>> GetRecords<T>(Stream file, Action<ImportResult<T>> done, Action<int> progress) where T : IImportModel;
+        public abstract string GetName();
+        public abstract TransactionSource GetTransactionSource();
+        public abstract Task<ImportResult<IImportModel>> GetRecords(Stream file, Action<ImportResult<IImportModel>> done, Action<int> progress);
     }
 }

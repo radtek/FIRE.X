@@ -20,6 +20,7 @@ namespace FIRE.X.DL
         public string LoanId { get; set; }
 
         public decimal? Balance { get; set; }
+        public TransactionType TransactionType { get; set; }
     }
 
 }
