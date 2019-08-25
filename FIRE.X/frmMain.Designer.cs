@@ -38,6 +38,7 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.ucInvestmentPerSource1 = new FIRE.X.UI.Charts.UCInvestmentPerSource();
             this.ucInvestmentsInterestIncomePerMonth1 = new FIRE.X.UI.Charts.UCInvestmentsInterestIncomePerMonth();
+            this.btnHome = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -61,6 +62,7 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnHome,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
@@ -69,7 +71,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -131,10 +133,19 @@
             // 
             // ucInvestmentsInterestIncomePerMonth1
             // 
+            this.ucInvestmentsInterestIncomePerMonth1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ucInvestmentsInterestIncomePerMonth1.Location = new System.Drawing.Point(209, 3);
             this.ucInvestmentsInterestIncomePerMonth1.Name = "ucInvestmentsInterestIncomePerMonth1";
-            this.ucInvestmentsInterestIncomePerMonth1.Size = new System.Drawing.Size(200, 200);
+            this.ucInvestmentsInterestIncomePerMonth1.Size = new System.Drawing.Size(914, 200);
             this.ucInvestmentsInterestIncomePerMonth1.TabIndex = 1;
+            // 
+            // btnHome
+            // 
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Size = new System.Drawing.Size(180, 22);
+            this.btnHome.Text = "Home";
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
             // frmMain
             // 
@@ -167,6 +178,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private UI.Charts.UCInvestmentPerSource ucInvestmentPerSource1;
         private UI.Charts.UCInvestmentsInterestIncomePerMonth ucInvestmentsInterestIncomePerMonth1;
+        private System.Windows.Forms.ToolStripMenuItem btnHome;
     }
 }
 

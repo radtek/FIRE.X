@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using FIRE.X.DL;
 using OxyPlot;
 using OxyPlot.Series;
+using OxyPlot.Axes;
 
 namespace FIRE.X.UI.Charts
 {
@@ -49,24 +50,34 @@ namespace FIRE.X.UI.Charts
                 }
             }
 
-            foreach(var item in list)
+            // add category
+            var categoryAxis1 = new CategoryAxis();
+            foreach (var category in list)
+            {
+                categoryAxis1.Labels.Add(category.Key.ToString("MM-yyyy"));
+            }
+
+            model.Axes.Add(categoryAxis1);
+
+            var maxItems = list.Select(f => f.Value.Count).Max();
+
+            for (int i = 0; i < maxItems; i++)
             {
                 var columnSeries = new ColumnSeries();
                 columnSeries.IsStacked = true;
-                columnSeries.Items.AddRange(item.Value);
+                for (int y = 0; y < list.Count(); y++)
+                {
+                    if(list.ElementAt(y).Value.Count > i)
+                        columnSeries.Items.Add(list.ElementAt(y).Value[i]);
+                    else
+                        columnSeries.Items.Add(new ColumnItem(0));
+                }
                 model.Series.Add(columnSeries);
+
             }
+            
 
             this.plotView1.Model = model;
-
-            //foreach(var d in data)
-            //{
-            //    series.Slices.Add(new PieSlice(d.Source.ToString(), (double)d.Amount));
-            //}
-
-            //model.Series.Add(series);
-
-            //this.plotView1.Model = model;
         }
     }
 }

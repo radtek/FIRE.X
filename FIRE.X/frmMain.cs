@@ -6,12 +6,16 @@ namespace FIRE.X
 {
     public partial class frmMain : Form
     {
+        Control Home;
+
         public frmMain()
         {
             InitializeComponent();
             
-            //this.cmbImport.SelectedItem = this.cmbImport.Items[0];
             this.Text = $"{this.Text} - {System.Reflection.Assembly.GetExecutingAssembly().GetName().Version}";
+
+            // we keep the home interface so we can reset to it
+            this.Home = tableLayoutPanel.GetControlFromPosition(1, 0);
         }
 
         public void SetMenu(UserControl menu)
@@ -20,10 +24,13 @@ namespace FIRE.X
             this.tableLayoutPanel.Controls.Clear();
 
             // add the menu
-            this.tableLayoutPanel.Controls.Add(menu, 0, 0);
+            if (menu != null)
+                this.tableLayoutPanel.Controls.Add(menu, 0, 0);
+            else
+                this.tableLayoutPanel.Controls.Remove(tableLayoutPanel.GetControlFromPosition(0, 0));
         }
 
-        public void SetContent(UserControl content)
+        public void SetContent(Control content)
         {
             // only clear the content
             tableLayoutPanel.Controls.Remove(tableLayoutPanel.GetControlFromPosition(1, 0));
@@ -62,6 +69,12 @@ namespace FIRE.X
         private void tableLayoutPanel_ControlAdded(object sender, ControlEventArgs e)
         {
             e.Control.Dock = DockStyle.Fill;
+        }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+            SetMenu(null);
+            SetContent(Home);
         }
     }
 }
