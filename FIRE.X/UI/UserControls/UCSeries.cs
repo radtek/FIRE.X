@@ -29,5 +29,21 @@ namespace FIRE.X.UI.UserControls
         {
             this.checkedListBox1.Items.Clear();
         }
+
+        private void BtnSelectNone_Click(object sender, EventArgs e)
+        {
+            for(int i = 0; i < this.checkedListBox1.Items.Count; i++)
+            {
+                this.checkedListBox1.SetItemChecked(i, false);
+            }
+        }
+
+        private void BtnSelectAll_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < this.checkedListBox1.Items.Count; i++)
+            {
+                this.checkedListBox1.SetItemChecked(i, true);
+            }
+        }
     }
 }

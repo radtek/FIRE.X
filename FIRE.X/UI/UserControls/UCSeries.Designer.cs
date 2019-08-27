@@ -29,21 +29,49 @@
         private void InitializeComponent()
         {
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.btnSelectAll = new System.Windows.Forms.Button();
+            this.btnSelectNone = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // checkedListBox1
             // 
-            this.checkedListBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.checkedListBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.checkedListBox1.FormattingEnabled = true;
             this.checkedListBox1.Location = new System.Drawing.Point(0, 0);
             this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(150, 150);
+            this.checkedListBox1.Size = new System.Drawing.Size(150, 124);
             this.checkedListBox1.TabIndex = 0;
+            // 
+            // btnSelectAll
+            // 
+            this.btnSelectAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnSelectAll.Location = new System.Drawing.Point(0, 127);
+            this.btnSelectAll.Name = "btnSelectAll";
+            this.btnSelectAll.Size = new System.Drawing.Size(75, 23);
+            this.btnSelectAll.TabIndex = 1;
+            this.btnSelectAll.Text = "All";
+            this.btnSelectAll.UseVisualStyleBackColor = true;
+            this.btnSelectAll.Click += new System.EventHandler(this.BtnSelectAll_Click);
+            // 
+            // btnSelectNone
+            // 
+            this.btnSelectNone.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelectNone.Location = new System.Drawing.Point(75, 127);
+            this.btnSelectNone.Name = "btnSelectNone";
+            this.btnSelectNone.Size = new System.Drawing.Size(75, 23);
+            this.btnSelectNone.TabIndex = 2;
+            this.btnSelectNone.Text = "None";
+            this.btnSelectNone.UseVisualStyleBackColor = true;
+            this.btnSelectNone.Click += new System.EventHandler(this.BtnSelectNone_Click);
             // 
             // UCSeries
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnSelectNone);
+            this.Controls.Add(this.btnSelectAll);
             this.Controls.Add(this.checkedListBox1);
             this.Name = "UCSeries";
             this.ResumeLayout(false);
@@ -53,5 +81,7 @@
         #endregion
 
         public System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.Button btnSelectAll;
+        private System.Windows.Forms.Button btnSelectNone;
     }
 }

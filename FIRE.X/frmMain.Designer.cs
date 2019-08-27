@@ -31,6 +31,7 @@
             this.openFileDialogSelectImport = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnHome = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.investmentsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.p2PToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -38,7 +39,6 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.ucInvestmentPerSource1 = new FIRE.X.UI.Charts.UCInvestmentPerSource();
             this.ucInvestmentsInterestIncomePerMonth1 = new FIRE.X.UI.Charts.UCInvestmentsInterestIncomePerMonth();
-            this.btnHome = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tableLayoutPanel.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -68,10 +68,17 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
+            // btnHome
+            // 
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Size = new System.Drawing.Size(107, 22);
+            this.btnHome.Text = "Home";
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
+            // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -92,16 +99,15 @@
             // 
             // tableLayoutPanel
             // 
+            this.tableLayoutPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel.AutoSize = true;
+            this.tableLayoutPanel.BackColor = System.Drawing.SystemColors.Control;
             this.tableLayoutPanel.ColumnCount = 2;
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 103F));
+            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel.Controls.Add(this.flowLayoutPanel1, 1, 0);
-            this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(0, 24);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             this.tableLayoutPanel.RowCount = 5;
@@ -110,7 +116,7 @@
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(1241, 566);
+            this.tableLayoutPanel.Size = new System.Drawing.Size(1301, 646);
             this.tableLayoutPanel.TabIndex = 11;
             this.tableLayoutPanel.ControlAdded += new System.Windows.Forms.ControlEventHandler(this.tableLayoutPanel_ControlAdded);
             // 
@@ -119,9 +125,9 @@
             this.flowLayoutPanel1.Controls.Add(this.ucInvestmentPerSource1);
             this.flowLayoutPanel1.Controls.Add(this.ucInvestmentsInterestIncomePerMonth1);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(106, 3);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(103, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(1132, 560);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(1195, 560);
             this.flowLayoutPanel1.TabIndex = 0;
             // 
             // ucInvestmentPerSource1
@@ -139,13 +145,6 @@
             this.ucInvestmentsInterestIncomePerMonth1.Name = "ucInvestmentsInterestIncomePerMonth1";
             this.ucInvestmentsInterestIncomePerMonth1.Size = new System.Drawing.Size(914, 200);
             this.ucInvestmentsInterestIncomePerMonth1.TabIndex = 1;
-            // 
-            // btnHome
-            // 
-            this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(180, 22);
-            this.btnHome.Text = "Home";
-            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
             // frmMain
             // 

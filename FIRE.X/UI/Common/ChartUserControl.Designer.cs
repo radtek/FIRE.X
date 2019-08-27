@@ -54,7 +54,7 @@
             this.plotView1.Location = new System.Drawing.Point(3, 29);
             this.plotView1.Name = "plotView1";
             this.plotView1.PanCursor = System.Windows.Forms.Cursors.Hand;
-            this.plotView1.Size = new System.Drawing.Size(610, 353);
+            this.plotView1.Size = new System.Drawing.Size(610, 506);
             this.plotView1.TabIndex = 5;
             this.plotView1.Text = "plotView1";
             this.plotView1.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
@@ -78,7 +78,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ucSeries.Location = new System.Drawing.Point(619, 29);
             this.ucSeries.Name = "ucSeries";
-            this.ucSeries.Size = new System.Drawing.Size(223, 353);
+            this.ucSeries.Size = new System.Drawing.Size(223, 506);
             this.ucSeries.TabIndex = 7;
             // 
             // ChartUserControl
@@ -90,7 +90,7 @@
             this.Controls.Add(this.btnSaveAsImage);
             this.Controls.Add(this.plotView1);
             this.Name = "ChartUserControl";
-            this.Size = new System.Drawing.Size(842, 385);
+            this.Size = new System.Drawing.Size(842, 538);
             this.ResumeLayout(false);
 
         }
