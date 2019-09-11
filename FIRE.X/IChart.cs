@@ -13,5 +13,6 @@ namespace FIRE.X
         Expression<Func<Transaction, bool>> GetTransactionSource();
         Task<object[]> GetSeries(DateTime from, DateTime to);
         DateTime?[] MaxRange();
+        string GetLineSeriesName(string serieName);
     }
 }

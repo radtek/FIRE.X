@@ -38,39 +38,39 @@ namespace FIRE.X.Grupeer.Charts
 
                 var rentPerDay = new LineSeries()
                 {
-                    Title = Resources.RENT_DAY + " grupeer",
+                    Title = GetLineSeriesName(Resources.RENT_DAY),
                     Smooth = true
                 };
 
                 var serieInterestTotal = new LineSeries()
                 {
-                    Title = Resources.RENT_TOTAL + " grupeer"
+                    Title = GetLineSeriesName(Resources.RENT_TOTAL)
                 };
 
                 var serieBalance = new LineSeries()
                 {
-                    Title = Resources.BALANCE + " grupeer"
+                    Title = GetLineSeriesName(Resources.BALANCE)
                 };
 
                 var serieInvestment = new LineSeries()
                 {
-                    Title = Resources.INVESTMENTS + " grupeer"
+                    Title = GetLineSeriesName(Resources.INVESTMENTS)
                 };
 
                 var serieDeposits = new LineSeries()
                 {
-                    Title = "Deposists" + " grupeer"
+                    Title = GetLineSeriesName("Deposits")
                 };
 
                 var serieYield = new LineSeries()
                 {
-                    Title = "Yield" + " grupeer",
+                    Title = GetLineSeriesName("Yield"),
                     Smooth = true
                 };
 
                 var serieXirr = new LineSeries()
                 {
-                    Title = "Xirr" + " grupeer"
+                    Title = GetLineSeriesName("Xirr")
                 };
 
                 var dataForIRR =
@@ -137,6 +137,11 @@ namespace FIRE.X.Grupeer.Charts
         public DateTime?[] MaxRange()
         {
             return ContextHelpers.GetRange()[TransactionSource.Grupeer];
+        }
+
+        public string GetLineSeriesName(string name)
+        {
+            return $"Grupeer-{name}";
         }
     }
 }

@@ -38,39 +38,39 @@ namespace FIRE.X.Charts
 
                 var rentPerDay = new LineSeries()
                 {
-                    Title = Resources.RENT_DAY + " all",
+                    Title = GetLineSeriesName(Resources.RENT_DAY),
                     Smooth = true
                 };
 
                 var serieInterestTotal = new LineSeries()
                 {
-                    Title = Resources.RENT_TOTAL + " all"
+                    Title = GetLineSeriesName(Resources.RENT_TOTAL)
                 };
 
                 var serieBalance = new LineSeries()
                 {
-                    Title = Resources.BALANCE + " all"
+                    Title = GetLineSeriesName(Resources.BALANCE)
                 };
 
                 var serieInvestment = new LineSeries()
                 {
-                    Title = Resources.INVESTMENTS + " all"
+                    Title = GetLineSeriesName(Resources.INVESTMENTS)
                 };
 
                 var serieDeposits = new LineSeries()
                 {
-                    Title = Resources.INVESTMENTS + " all"
+                    Title = GetLineSeriesName("Deposits")
                 };
 
                 var serieYield = new LineSeries()
                 {
-                    Title = "Yield all",
+                    Title = GetLineSeriesName("Yield"),
                     Smooth = true
                 };
 
                 var serieXirr = new LineSeries()
                 {
-                    Title = "Xirr all"
+                    Title = GetLineSeriesName("Xirr")
                 };
 
                 var dataForIRR =
@@ -150,6 +150,11 @@ namespace FIRE.X.Charts
             }
 
             return new DateTime?[2] { lowest, highest };
+        }
+
+        public string GetLineSeriesName(string name)
+        {
+            return $"All-{name}";
         }
     }
 }

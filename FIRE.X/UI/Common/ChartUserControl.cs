@@ -46,36 +46,73 @@ namespace FIRE.X.UI.Common
 
             this.plotView1.Model = Chart;
 
-            this.ucSeries.checkedListBox1.ItemCheck += CheckedListBox1_ItemCheck;
+            this.ucSeries.treeView1.AfterCheck += TreeView1_AfterCheck;
 
             LoadAll();
         }
 
-        private void CheckedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void TreeView1_AfterCheck(object sender, TreeViewEventArgs e)
         {
-            List<string> checkedItems = new List<string>();
-            foreach (var item in this.ucSeries.checkedListBox1.CheckedItems)
-                checkedItems.Add(item.ToString());
+            // dont do anything when we set the sub items on checked state of the parent
+            if (e.Action == TreeViewAction.Unknown)
+                return;
 
-            if (e.NewValue == CheckState.Checked)
-                checkedItems.Add(this.ucSeries.checkedListBox1.Items[e.Index].ToString());
-            else
-                checkedItems.Remove(this.ucSeries.checkedListBox1.Items[e.Index].ToString());
-
-            foreach (var serie in this.Chart.Series)
+            // unselect the children if any
+            foreach (var node in e.Node.Nodes)
             {
-                if (!checkedItems.Contains(serie.Title))
-                    serie.IsVisible = false;
-                else
-                    serie.IsVisible = true;
+                (node as TreeNode).Checked = e.Node.Checked;
             }
 
+            List<string> checkedItems = GetChecked(e.Node, true);
+            
+            //foreach (var serie in this.Chart.Series)
+            //{
+            //    if (!checkedItems.Contains(serie.Title))
+            //        serie.IsVisible = false;
+            //    else
+            //        serie.IsVisible = true;
+            //}
+
             this.Chart.InvalidatePlot(true);
+        }
+
+        public List<string> GetChecked(TreeNode node, bool lookUp = false)
+        {
+            var _list = new List<string>();
+
+            if(node.Nodes.Count > 0)
+            {
+                foreach(var _node in node.Nodes.Cast<TreeNode>().Where(n => n.Checked))
+                    _list.AddRange(GetChecked(_node, true));
+            }
+
+            if (lookUp)
+            {
+                if (node.Parent != null && node.Parent.Nodes.Count > 0)
+                {
+                    _list.AddRange(GetChecked(node.Parent, true));
+                }
+
+                if (node.PrevNode != null)
+                    _list.AddRange(GetChecked(node.PrevNode));
+
+                if (node.NextNode != null)
+                    _list.AddRange(GetChecked(node.NextNode));
+
+            }
+
+
+
+            if(node.Checked)
+                _list.Add(node.Text);
+
+            return _list;
         }
 
         private void Series_CollectionChanged(object sender, ElementCollectionChangedEventArgs<OxyPlot.Series.Series> e)
         {
             ucSeries.AddSeries(e.AddedItems.ToArray());
+            ucSeries.Reorder();
         }
 
         private void Clear()

@@ -39,39 +39,39 @@ namespace FIRE.X.Mintos.Charts
 
                 var rentPerDay = new LineSeries()
                 {
-                    Title = Resources.RENT_DAY + " mintos",
+                    Title = GetLineSeriesName(Resources.RENT_DAY),
                     Smooth = true
                 };
 
                 var serieInterestTotal = new LineSeries()
                 {
-                    Title = Resources.RENT_TOTAL + " mintos"
+                    Title = GetLineSeriesName(Resources.RENT_TOTAL)
                 };
 
                 var serieBalance = new LineSeries()
                 {
-                    Title = Resources.BALANCE + " mintos"
+                    Title = GetLineSeriesName(Resources.BALANCE)
                 };
 
                 var serieInvestment = new LineSeries()
                 {
-                    Title = Resources.INVESTMENTS + " mintos"
+                    Title = GetLineSeriesName(Resources.INVESTMENTS)
                 };
 
                 var serieDeposits = new LineSeries()
                 {
-                    Title = "Deposits" + " mintos"
+                    Title = GetLineSeriesName("Deposits")
                 };
 
                 var serieYield = new LineSeries()
                 {
-                    Title = "Yield" + " mintos",
+                    Title = GetLineSeriesName("Yield"),
                     Smooth = true
                 };
 
                 var serieXirr = new LineSeries()
                 {
-                    Title = "Xirr" + " mintos"
+                    Title = GetLineSeriesName("Xirr")
                 };
 
                 var dataForIRR =
@@ -137,6 +137,11 @@ namespace FIRE.X.Mintos.Charts
         public DateTime?[] MaxRange()
         {
             return ContextHelpers.GetRange()[TransactionSource.Mintos];
+        }
+
+        public string GetLineSeriesName(string name)
+        {
+            return $"Mintos-{name}";
         }
     }
 }
